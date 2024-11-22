@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roleta de Sorte</title>
+    <link rel="stylesheet" href="css/style.css"> <!-- Link para o CSS -->
+</head>
+<body>
+    <div class="game-container">
+        <h1>Roleta da Fortuna</h1>
+        <div class="game-info">
+            <p>Créditos: <span id="credits">100</span></p>
+            <button id="spin-btn" onclick="spinWheel()">Girar a Roleta</button>
+        </div>
+
+        <div class="wheel-container">
+            <div id="wheel" class="wheel">
+                <div class="wheel-section" id="section1">2x</div>
+                <div class="wheel-section" id="section2">Rodada Grátis</div>
+                <div class="wheel-section" id="section3">100 Créditos</div>
+                <div class="wheel-section" id="section4">Tente Novamente</div>
+                <div class="wheel-section" id="section5">3x</div>
+                <div class="wheel-section" id="section6">1000 Créditos</div>
+            </div>
+        </div>
+
+        <div class="result">
+            <h2>Resultado:</h2>
+            <p id="result-text">Aguardando o giro...</p>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script> <!-- Link para o JS -->
+</body>
+</html>
