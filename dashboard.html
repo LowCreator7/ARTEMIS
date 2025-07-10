@@ -84,6 +84,47 @@
     .btn-perfil:hover {
       background-color: #d98f00;
     }
+    @media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .sidebar a {
+    display: inline-block;
+    margin: 10px;
+    font-size: 15px;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .dashboard {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+
+  .btn-perfil {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px;
+  }
+}
   </style>
 </head>
 <body>
