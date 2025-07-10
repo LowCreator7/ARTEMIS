@@ -132,6 +132,11 @@
       <h2>🧠 Sobre o Candidato</h2>
       <p id="sobre"></p>
     </div>
+
+    <div style="margin-top: 30px; display: flex; gap: 20px;">
+      <button onclick="window.location.href='perfil.html'">✏️ Editar Currículo</button>
+      <button onclick="limparCurriculo()">🧹 Limpar Currículo</button>
+    </div>
   </main>
 
   <script type="module">
@@ -188,6 +193,37 @@
     window.logout = async () => {
       await signOut(auth);
       window.location.href = 'index.html';
+    };
+  </script>
+
+  <script type="module">
+    import { auth, db } from './firebaseConfig.js';
+    import { deleteDoc, doc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    let uid = null;
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        uid = user.uid;
+      }
+    });
+
+    window.limparCurriculo = async () => {
+      if (!uid) {
+        alert("Usuário não autenticado.");
+        return;
+      }
+
+      const confirmacao = confirm("Tem certeza que deseja apagar todos os dados do currículo? Essa ação é irreversível.");
+      if (confirmacao) {
+        try {
+          await deleteDoc(doc(db, "usuarios", uid));
+          alert("Currículo apagado com sucesso!");
+          window.location.reload();
+        } catch (error) {
+          alert("Erro ao apagar currículo: " + error.message);
+        }
+      }
     };
   </script>
 </body>
