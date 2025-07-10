@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Meu Perfil - Ártemis</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 240px;
+      background-color: #F4A300;
+      color: white;
+      height: 100vh;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      position: fixed;
+    }
+
+    .sidebar h2 {
+      margin-top: 0;
+      font-size: 22px;
+      margin-bottom: 40px;
+    }
+
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-size: 16px;
+      transition: 0.2s;
+    }
+
+    .sidebar a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      margin-left: 240px;
+      padding: 40px;
+      flex: 1;
+    }
+
+    .perfil-container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .perfil-container h2 {
+      color: #F4A300;
+      margin-top: 30px;
+      border-left: 4px solid #F4A300;
+      padding-left: 10px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    #foto {
+      margin-top: 10px;
+    }
+
+    #previewFoto {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      margin-top: 10px;
+      display: none;
+    }
+
+    button {
+      background-color: #F4A300;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #d98f00;
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <h2>Ártemis</h2>
+    <a href="dashboard.html">🏠 Dashboard</a>
+    <a href="perfil.html">📝 Meu Perfil</a>
+    <a href="curriculo.html">📄 Meu Currículo</a>
+    <a href="#" onclick="logout()">🚪 Sair</a>
+  </aside>
+
+  <main class="content">
+    <div class="perfil-container">
+      <form id="formPainel">
+        <h2>📸 Foto de Perfil</h2>
+        <input type="file" id="foto" accept="image/*" />
+        <img id="previewFoto" alt="Prévia da foto" />
+
+        <h2>🧍 Dados Pessoais</h2>
+        <input type="text" id="nome" placeholder="Nome completo" required />
+        <input type="date" id="nascimento" placeholder="Data de nascimento" required />
+        <input type="text" id="cidadeEstado" placeholder="Cidade e Estado" required />
+        <input type="tel" id="telefone" placeholder="Telefone / WhatsApp" required />
+
+        <h2>🎓 Escolaridade</h2>
+        <select id="escolaridade" required>
+          <option value="">Escolaridade atual</option>
+          <option>Ensino Fundamental</option>
+          <option>Ensino Médio</option>
+          <option>Ensino Técnico</option>
+          <option>Ensino Superior</option>
+          <option>Pós-graduação</option>
+        </select>
+
+        <h2>🎓 Situação</h2>
+        <select id="situacao" required>
+          <option value="">Situação atual</option>
+          <option>Trabalhando</option>
+          <option>Estudando</option>
+          <option>Procurando Primeiro Emprego</option>
+          <option>Em busca de realocação no mercado</option>
+          <option>Outro</option>
+        </select>
+
+        <h2>💡 Interesses</h2>
+        <select id="interesses" required multiple>
+          <option>Atendimento ao público</option>
+          <option>Administrativo</option>
+          <option>Logística</option>
+          <option>Tecnologia</option>
+          <option>Vendas</option>
+          <option>Serviços gerais</option>
+          <option>Produção/Industria</option>
+          <option>Saúde</option>
+          <option>Educação</option>
+          <option>Outros</option>
+        </select>
+
+        <h2>💡 Disponibilidade</h2>
+        <select id="disponibilidade" required>
+          <option value="">Selecione</option>
+          <option>Manhã</option>
+          <option>Tarde</option>
+          <option>Noite</option>
+          <option>Integral</option>
+          <option>Escala/Finais de semana</option>
+        </select>
+
+        <h2>📚 Qualificações</h2>
+        <input type="text" id="cursos" placeholder="Cursos realizados (nome + instituição)" />
+        <input type="text" id="idiomas" placeholder="Idiomas e nível de fluência" />
+        <input type="text" id="informatica" placeholder="Ferramentas ou sistemas que domina" />
+
+        <h2>💼 Experiência Profissional</h2>
+        <textarea id="experiencia" placeholder="Empresa, cargo e tempo de serviço"></textarea>
+        <textarea id="atividades" placeholder="Atividades exercidas e resultados alcançados"></textarea>
+
+        <h2>🧠 Sobre Você</h2>
+        <textarea id="sobre" placeholder="Como você se descreveria como profissional?"></textarea>
+
+        <button type="submit">💾 Salvar Perfil</button>
+      </form>
+    </div>
+  </main>
+
+  <script type="module" src="painel.js"></script>
+  <script type="module">
+    import { auth } from './firebaseConfig.js';
+    import { signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    window.logout = async () => {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    };
+
+    document.getElementById('foto').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = document.getElementById('previewFoto');
+          img.src = event.target.result;
+          img.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
