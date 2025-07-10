@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Ártemis</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .dashboard {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fffbe9;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+    }
+    .dashboard h1 {
+      color: #F4A300;
+      margin-bottom: 20px;
+    }
+    .dashboard p {
+      margin-bottom: 30px;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+    .btn-perfil {
+      background-color: #F4A300;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-perfil:hover {
+      background-color: #d98f00;
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h1 id="saudacao">Olá, candidato!</h1>
+    <p>
+      Seja bem-vindo(a) à <strong>Ártemis</strong>, nascemos para transformar histórias profissionais com estratégia, respeito e propósito. Somos uma curadoria de talentos que acredita na força da escolha certa, no momento certo.
+
+      Estamos muito felizes em saber que você deseja crescer, se qualificar e conquistar novas oportunidades no mercado de trabalho. Este é o primeiro passo para fazer parte da nossa base de talentos — um espaço que conecta profissionais em evolução a empresas que valorizam comprometimento, preparo e atitude.
+
+      Se você está disposto(a) a construir algo novo, preencha com atenção o questionário abaixo e dê início à sua jornada com o selo Ártemis de eficiência e qualidade.
+
+      Vamos juntos transformar talento em resultado.
+
+      Com você,
+      Ártemis – Consultoria e Treinamentos
+    </p>
+    <a href="perfil.html" class="btn-perfil">Preencher meu perfil</a>
+  </div>
+
+  <script type="module">
+    import { auth } from './firebaseConfig.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const nome = user.email.split("@")[0];
+        document.getElementById("saudacao").textContent = `Olá, ${nome}!`;
+      } else {
+        alert("Você precisa estar logado para acessar esta página.");
+        window.location.href = "index.html";
+      }
+    });
+  </script>
+</body>
+</html>

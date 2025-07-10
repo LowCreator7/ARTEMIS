@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Currículo do Candidato</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .curriculo {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+    }
+    .curriculo h1 {
+      color: #F4A300;
+      margin-bottom: 5px;
+    }
+    .curriculo h2 {
+      margin-top: 30px;
+      color: #4B4B4B;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+    }
+    .curriculo p {
+      margin: 6px 0;
+    }
+    .tag {
+      display: inline-block;
+      background-color: #F4A300;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      margin: 2px;
+    }
+    #fotoPerfil {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="curriculo">
+    <div style="text-align: center;">
+      <img id="fotoPerfil" src="" alt="Foto do Candidato" style="display: none;" />
+      <h1 id="nome">Nome do Candidato</h1>
+      <p id="cidadeEstado"></p>
+      <p id="telefone"></p>
+    </div>
+
+    <h2>🎓 Escolaridade e Situação Atual</h2>
+    <p><strong>Escolaridade:</strong> <span id="escolaridade"></span></p>
+    <p><strong>Situação:</strong> <span id="situacao"></span></p>
+
+    <h2>💡 Interesses</h2>
+    <div id="interesses"></div>
+    <p><strong>Disponibilidade:</strong> <span id="disponibilidade"></span></p>
+
+    <h2>📚 Qualificações</h2>
+    <p><strong>Cursos:</strong> <span id="cursos"></span></p>
+    <p><strong>Idiomas:</strong> <span id="idiomas"></span></p>
+    <p><strong>Informática:</strong> <span id="informatica"></span></p>
+
+    <h2>💼 Experiência Profissional</h2>
+    <p><strong>Empresa/Cargo:</strong> <span id="experiencia"></span></p>
+    <p><strong>Atividades:</strong> <span id="atividades"></span></p>
+
+    <h2>🧠 Sobre o Candidato</h2>
+    <p id="sobre"></p>
+  </div>
+
+  <script type="module">
+    import { auth, db } from './firebaseConfig.js';
+    import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        alert("Você precisa estar logado para ver seu currículo.");
+        window.location.href = "index.html";
+        return;
+      }
+
+      const uid = user.uid;
+      const snap = await getDoc(doc(db, "usuarios", uid));
+
+      if (snap.exists()) {
+        const dados = snap.data();
+        document.getElementById("nome").textContent = dados.nome || "";
+        document.getElementById("cidadeEstado").textContent = dados.cidadeEstado || "";
+        document.getElementById("telefone").textContent = dados.telefone || "";
+        document.getElementById("escolaridade").textContent = dados.escolaridade || "";
+        document.getElementById("situacao").textContent = dados.situacao || "";
+        document.getElementById("disponibilidade").textContent = dados.disponibilidade || "";
+        document.getElementById("cursos").textContent = dados.cursos || "";
+        document.getElementById("idiomas").textContent = dados.idiomas || "";
+        document.getElementById("informatica").textContent = dados.informatica || "";
+        document.getElementById("experiencia").textContent = dados.experiencia || "";
+        document.getElementById("atividades").textContent = dados.atividades || "";
+        document.getElementById("sobre").textContent = dados.sobre || "";
+
+        if (dados.interesses) {
+          const interessesEl = document.getElementById("interesses");
+          dados.interesses.forEach(item => {
+            const span = document.createElement("span");
+            span.className = "tag";
+            span.textContent = item;
+            interessesEl.appendChild(span);
+          });
+        }
+
+        if (dados.fotoURL) {
+          const foto = document.getElementById("fotoPerfil");
+          foto.src = dados.fotoURL;
+          foto.style.display = 'block';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
