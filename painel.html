@@ -2,62 +2,105 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Painel do Candidato</title>
+  <title>Meu Perfil - Ártemis</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #F4A300;
-      padding: 10px 20px;
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-
-    .topbar h1 {
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Inter', sans-serif;
       margin: 0;
+      padding: 0;
+    }
+
+    .topbar {
+      background-color: #F4A300;
+      color: white;
+      padding: 20px;
       font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    .profile-pic {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid #ccc;
-      margin: 10px 0;
+    .perfil-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
     }
 
-    .section-title {
-      margin-top: 30px;
+    .perfil-container h2 {
       color: #F4A300;
-      font-weight: 600;
+      margin-top: 30px;
+      border-left: 4px solid #F4A300;
+      padding-left: 10px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    #foto {
+      margin-top: 10px;
+    }
+
+    #previewFoto {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid #ccc;
+      margin-top: 10px;
+      display: none;
+    }
+
+    button {
+      background-color: #F4A300;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #d98f00;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="topbar">
-      <h1>👤 Meu Perfil</h1>
-      <button onclick="logout()" style="background-color: white; color: #F4A300; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Sair</button>
-    </div>
+  <div class="topbar">Meu Perfil - Ártemis</div>
 
+  <div class="perfil-container">
     <form id="formPainel">
-      <!-- Foto do usuário -->
-      <p class="section-title">📸 Foto de Perfil</p>
+      <h2>📸 Foto de Perfil</h2>
       <input type="file" id="foto" accept="image/*" />
-      <img id="previewFoto" class="profile-pic" src="" alt="Prévia da foto" style="display: none;" />
+      <img id="previewFoto" alt="Prévia da foto" />
 
-      <!-- Nome e dados pessoais -->
-      <p class="section-title">🧍 Dados Pessoais</p>
+      <h2>🧍 Dados Pessoais</h2>
       <input type="text" id="nome" placeholder="Nome completo" required />
       <input type="date" id="nascimento" placeholder="Data de nascimento" required />
       <input type="text" id="cidadeEstado" placeholder="Cidade e Estado" required />
       <input type="tel" id="telefone" placeholder="Telefone / WhatsApp" required />
 
-      <!-- Escolaridade e situação -->
-      <p class="section-title">🎓 Escolaridade e Situação</p>
+      <h2>🎓 Escolaridade</h2>
       <select id="escolaridade" required>
         <option value="">Escolaridade atual</option>
         <option>Ensino Fundamental</option>
@@ -66,26 +109,50 @@
         <option>Ensino Superior</option>
         <option>Pós-graduação</option>
       </select>
-      <input type="text" id="situacao" placeholder="Situação atual (ex: estudando, trabalhando...)" required />
+      
+      <h2>🎓 Situação</h2>
+      <select id="Situação" required>
+        <option value="">Situação atual</option>
+        <option>Trabalhando</option>
+        <option>Estudando</option>
+        <option>Procurando Primeiro Emprego</option>
+        <option>Em busca de realocação no mercado</option>
+        <option>Outro</option>
+      </select>
+      
+      <h2>💡 Interesses</h2>
+      <select id="Interesses" required>
+        <option value="">Atendimento ao público</option>
+        <option>Administrativo</option>
+        <option>Logística</option>
+        <option>Tecnologia</option>
+        <option>Vendas</option>
+        <option>Serviços gerais</option>
+        <option>Produção/Industria</option>
+        <option>Saúde</option>
+        <option>Educação</option>
+        <option>Outros</option>
+      </select>
+      
+      <h2>💡 Disponibilidade</h2>
+      <select id="Disponibilidade" required>
+        <option value="">Manhã</option>
+        <option>Tarde</option>
+        <option>Noite</option>
+        <option>Integral</option>
+        <option>Escala/Finais de semana</option>
+      </select>
 
-      <!-- Interesses -->
-      <p class="section-title">💡 Interesses</p>
-      <input type="text" id="interesses" placeholder="Áreas de interesse (separadas por vírgula)" />
-      <input type="text" id="disponibilidade" placeholder="Turno disponível (ex: manhã, tarde, integral)" />
-
-      <!-- Qualificações -->
-      <p class="section-title">📚 Qualificações</p>
+      <h2>📚 Qualificações</h2>
       <input type="text" id="cursos" placeholder="Cursos realizados (nome + instituição)" />
       <input type="text" id="idiomas" placeholder="Idiomas e nível de fluência" />
       <input type="text" id="informatica" placeholder="Ferramentas ou sistemas que domina" />
 
-      <!-- Experiência -->
-      <p class="section-title">💼 Experiência Profissional</p>
+      <h2>💼 Experiência Profissional</h2>
       <textarea id="experiencia" placeholder="Empresa, cargo e tempo de serviço"></textarea>
       <textarea id="atividades" placeholder="Atividades exercidas e resultados alcançados"></textarea>
 
-      <!-- Sobre -->
-      <p class="section-title">🧠 Sobre Você</p>
+      <h2>🧠 Sobre Você</h2>
       <textarea id="sobre" placeholder="Como você se descreveria como profissional?"></textarea>
 
       <button type="submit">💾 Salvar Perfil</button>
@@ -97,12 +164,6 @@
     import { auth } from './firebaseConfig.js';
     import { signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
 
-    window.logout = async () => {
-      await signOut(auth);
-      window.location.href = 'index.html';
-    };
-
-    // Preview da foto de perfil
     document.getElementById('foto').addEventListener('change', function (e) {
       const file = e.target.files[0];
       if (file) {
