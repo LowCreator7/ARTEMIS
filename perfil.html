@@ -114,8 +114,6 @@
       display: block;
       margin-bottom: 8px;
       font-size: 15px;
-      background-color: #F4A300;
-      color: #fff;
       padding: 8px 12px;
       border-radius: 8px;
       cursor: pointer;
@@ -123,6 +121,25 @@
 
     .checkbox-group input {
       margin-right: 10px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .input-row input {
+      flex: 1;
+    }
+
+    .remove-btn {
+      background-color: #ccc;
+      color: #333;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -232,35 +249,30 @@
     });
   </script>
   <script>
-    function adicionarQualificacao() {
-      const container = document.getElementById("qualificacoes");
+    function adicionarCampo(containerId, className, placeholder) {
+      const container = document.getElementById(containerId);
+      const wrapper = document.createElement("div");
+      wrapper.className = "input-row";
+
       const input = document.createElement("input");
       input.type = "text";
-      input.placeholder = "Curso (nome + instituição)";
-      input.className = "curso-extra";
-      container.appendChild(input);
+      input.placeholder = placeholder;
+      input.className = className;
+
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.textContent = "Remover";
+      removeBtn.className = "remove-btn";
+      removeBtn.onclick = () => wrapper.remove();
+
+      wrapper.appendChild(input);
+      wrapper.appendChild(removeBtn);
+      container.appendChild(wrapper);
     }
 
-    function adicionarExperiencia() {
-      const container = document.getElementById("experiencias");
-
-      const expInput = document.createElement("input");
-      expInput.type = "text";
-      expInput.placeholder = "Empresa, cargo e tempo de serviço";
-      expInput.className = "experiencia-extra";
-
-      const atividadesInput = document.createElement("input");
-      atividadesInput.type = "text";
-      atividadesInput.placeholder = "Atividades exercidas e resultados";
-      atividadesInput.className = "atividade-extra";
-
-      container.appendChild(expInput);
-      container.appendChild(atividadesInput);
-    }
-
-    // Inicializa com um campo por padrão
-    adicionarQualificacao();
-    adicionarExperiencia();
+    adicionarCampo("qualificacoes", "curso-extra", "Curso (nome + instituição)");
+    adicionarCampo("experiencias", "experiencia-extra", "Empresa, cargo e tempo de serviço");
+    adicionarCampo("experiencias", "atividade-extra", "Atividades exercidas e resultados");
   </script>
 </body>
 </html>
