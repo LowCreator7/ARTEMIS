@@ -51,6 +51,10 @@ function setInputValues(className, values) {
     removeBtn.type = "button";
     removeBtn.textContent = "Remover";
     removeBtn.style.backgroundColor = "#ccc";
+    removeBtn.style.border = "none";
+    removeBtn.style.borderRadius = "4px";
+    removeBtn.style.padding = "6px 10px";
+    removeBtn.style.cursor = "pointer";
     removeBtn.onclick = () => wrapper.remove();
 
     wrapper.appendChild(input);
