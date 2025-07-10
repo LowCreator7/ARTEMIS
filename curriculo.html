@@ -149,8 +149,6 @@
     import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
     import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-    let dadosCache = null;
-
     onAuthStateChanged(auth, async (user) => {
       if (!user) {
         alert("Você precisa estar logado para ver seu currículo.");
@@ -163,17 +161,15 @@
 
       if (snap.exists()) {
         const dados = snap.data();
-        dadosCache = dados;
-
         document.getElementById("nome").textContent = dados.nome || "";
         document.getElementById("cidadeEstado").textContent = dados.cidadeEstado || "";
         document.getElementById("telefone").textContent = dados.telefone || "";
         document.getElementById("escolaridade").textContent = dados.escolaridade || "";
-        document.getElementById("cursos").textContent = dados.cursos || "";
+        document.getElementById("cursos").textContent = (dados.cursos || []).join(', ');
         document.getElementById("idiomas").textContent = dados.idiomas || "";
         document.getElementById("informatica").textContent = dados.informatica || "";
-        document.getElementById("experiencia").textContent = dados.experiencia || "";
-        document.getElementById("atividades").textContent = dados.atividades || "";
+        document.getElementById("experiencia").textContent = (dados.experiencia || []).join(', ');
+        document.getElementById("atividades").textContent = (dados.atividades || []).join(', ');
         document.getElementById("sobre").textContent = dados.sobre || "";
 
         function renderTags(containerId, values) {
@@ -205,10 +201,7 @@
     };
 
     window.editarCurriculo = () => {
-      if (dadosCache) {
-        localStorage.setItem('dadosPerfil', JSON.stringify(dadosCache));
-      }
-      window.location.href = 'perfil.html';
+      window.location.href = 'perfil.html?editar=true';
     };
   </script>
 
