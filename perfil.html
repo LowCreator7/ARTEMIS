@@ -111,16 +111,18 @@
     }
 
     .checkbox-group label {
-      display: block;
+      display: flex;
+      align-items: center;
       margin-bottom: 8px;
       font-size: 15px;
-      padding: 8px 12px;
-      border-radius: 8px;
+      padding: 4px 0;
+      gap: 8px;
       cursor: pointer;
     }
 
-    .checkbox-group input {
-      margin-right: 10px;
+    .checkbox-group input[type="checkbox"] {
+      margin: 0;
+      transform: scale(1.2);
     }
 
     .input-row {
@@ -209,13 +211,14 @@
 
         <h2>📚 Qualificações</h2>
         <div id="qualificacoes"></div>
-        <button type="button" onclick="adicionarQualificacao()">➕ Adicionar Curso</button>
+        <button type="button" onclick="adicionarCampo('qualificacoes', 'curso-extra', 'Curso (nome + instituição)')">➕ Adicionar Curso</button>
         <input type="text" id="idiomas" placeholder="Idiomas e nível de fluência" />
         <input type="text" id="informatica" placeholder="Ferramentas ou sistemas que domina" />
 
         <h2>💼 Experiência Profissional</h2>
         <div id="experiencias"></div>
-        <button type="button" onclick="adicionarExperiencia()">➕ Adicionar Experiência</button>
+        <button type="button" onclick="adicionarCampo('experiencias', 'experiencia-extra', 'Empresa, cargo e tempo de serviço')">➕ Adicionar Experiência</button>
+        <button type="button" onclick="adicionarCampo('experiencias', 'atividade-extra', 'Atividades exercidas e resultados')">➕ Adicionar Atividades</button>
 
         <h2>🧠 Sobre Você</h2>
         <textarea id="sobre" placeholder="Como você se descreveria como profissional?"></textarea>
