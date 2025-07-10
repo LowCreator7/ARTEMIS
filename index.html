@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Banco de Talentos Ártemis</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Login - Ártemis 2026</h1>
+    <form>
+      <input type="email" id="email" placeholder="E-mail" required />
+      <input type="password" id="senha" placeholder="Senha" required />
+      <button type="button" onclick="login()">Entrar</button>
+    </form>
+    <p style="text-align: center; margin-top: 15px;">
+      <a href="registro.html">Criar nova conta</a>
+    </p>
+  </div>
+
+  <script type="module">
+    import { auth } from './firebaseConfig.js';
+    import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    window.login = async () => {
+      const email = document.getElementById('email').value;
+      const senha = document.getElementById('senha').value;
+
+      try {
+        await signInWithEmailAndPassword(auth, email, senha);
+        alert('Login realizado com sucesso!');
+        window.location.href = 'painel.html'; // substitua pelo dashboard futuramente
+      } catch (error) {
+        alert('Erro ao entrar: ' + error.message);
+      }
+    };
+  </script>
+</body>
+</html>

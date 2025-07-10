@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel do Candidato</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Perfil Profissional</h1>
+    <form id="formPainel">
+      <!-- Nome e dados pessoais -->
+      <input type="text" id="nome" placeholder="Nome completo" required />
+      <input type="date" id="nascimento" placeholder="Data de nascimento" required />
+      <input type="text" id="cidadeEstado" placeholder="Cidade e Estado" required />
+      <input type="tel" id="telefone" placeholder="Telefone / WhatsApp" required />
+
+      <!-- Escolaridade e situação -->
+      <select id="escolaridade" required>
+        <option value="">Escolaridade atual</option>
+        <option>Ensino Fundamental</option>
+        <option>Ensino Médio</option>
+        <option>Ensino Técnico</option>
+        <option>Ensino Superior</option>
+        <option>Pós-graduação</option>
+      </select>
+      <input type="text" id="situacao" placeholder="Situação atual (ex: estudando, trabalhando...)" required />
+
+      <!-- Interesses -->
+      <input type="text" id="interesses" placeholder="Áreas de interesse (separadas por vírgula)" />
+      <input type="text" id="disponibilidade" placeholder="Turno disponível (ex: manhã, tarde, integral)" />
+
+      <!-- Qualificações -->
+      <input type="text" id="cursos" placeholder="Cursos realizados (nome + instituição)" />
+      <input type="text" id="idiomas" placeholder="Idiomas e nível de fluência" />
+      <input type="text" id="informatica" placeholder="Ferramentas ou sistemas que domina" />
+
+      <!-- Experiência -->
+      <textarea id="experiencia" placeholder="Empresa, cargo e tempo de serviço"></textarea>
+      <textarea id="atividades" placeholder="Atividades exercidas e resultados alcançados"></textarea>
+
+      <!-- Sobre -->
+      <textarea id="sobre" placeholder="Como você se descreveria como profissional?"></textarea>
+
+      <button type="submit">Salvar Perfil</button>
+    </form>
+  </div>
+
+  <script type="module" src="painel.js"></script>
+</body>
+</html>
