@@ -5,54 +5,76 @@
   <title>Dashboard - Ártemis</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    body {
+      background-color: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .topbar {
+      background-color: #F4A300;
+      color: white;
+      padding: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
     .dashboard {
-      max-width: 700px;
+      max-width: 900px;
       margin: 40px auto;
       padding: 30px;
-      background: #fffbe9;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
+      background: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.06);
       border-radius: 12px;
     }
+
     .dashboard h1 {
-      color: #F4A300;
-      margin-bottom: 20px;
+      color: #333;
+      margin-bottom: 10px;
     }
+
     .dashboard p {
-      margin-bottom: 30px;
       font-size: 16px;
       line-height: 1.6;
+      color: #555;
     }
+
     .btn-perfil {
+      display: inline-block;
       background-color: #F4A300;
       color: white;
       border: none;
-      padding: 12px 20px;
+      padding: 14px 24px;
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
       text-decoration: none;
+      margin-top: 30px;
+      transition: background 0.3s ease;
     }
+
     .btn-perfil:hover {
       background-color: #d98f00;
     }
   </style>
 </head>
 <body>
+  <div class="topbar">Painel do Candidato – Ártemis</div>
+
   <div class="dashboard">
     <h1 id="saudacao">Olá, candidato!</h1>
     <p>
-      Seja bem-vindo(a) à <strong>Ártemis</strong>, nascemos para transformar histórias profissionais com estratégia, respeito e propósito. Somos uma curadoria de talentos que acredita na força da escolha certa, no momento certo.
-
-      Estamos muito felizes em saber que você deseja crescer, se qualificar e conquistar novas oportunidades no mercado de trabalho. Este é o primeiro passo para fazer parte da nossa base de talentos — um espaço que conecta profissionais em evolução a empresas que valorizam comprometimento, preparo e atitude.
-
-      Se você está disposto(a) a construir algo novo, preencha com atenção o questionário abaixo e dê início à sua jornada com o selo Ártemis de eficiência e qualidade.
-
-      Vamos juntos transformar talento em resultado.
-
-      Com você,
-      Ártemis – Consultoria e Treinamentos
+      Bem-vindo(a) ao seu espaço dentro da <strong>Ártemis</strong>!<br />
+      Aqui, valorizamos cada história, cada trajetória e cada talento. Nosso propósito é abrir portas para oportunidades reais, conectando você com empresas e projetos que reconhecem o seu valor.
     </p>
-    <a href="perfil.html" class="btn-perfil">Preencher meu perfil</a>
+
+    <p>
+      Para começarmos, clique abaixo e preencha seu perfil profissional com suas experiências, habilidades e preferências. É com base nesses dados que nossa equipe poderá te apresentar ao mercado da melhor forma possível.
+    </p>
+
+    <a href="perfil.html" class="btn-perfil">Preencher / Atualizar meu Perfil</a>
   </div>
 
   <script type="module">
