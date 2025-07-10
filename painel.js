@@ -35,37 +35,28 @@ function setInputValues(className, values) {
   const container = className.includes('curso') ? document.getElementById('qualificacoes') : document.getElementById('experiencias');
   container.innerHTML = '';
   values.forEach(val => {
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "flex";
+    wrapper.style.gap = "10px";
+    wrapper.style.marginBottom = "10px";
+
     const input = document.createElement("input");
     input.type = "text";
     input.value = val;
     input.placeholder = className.includes('curso') ? "Curso (nome + instituição)" : (className.includes('atividade') ? "Atividades exercidas e resultados" : "Empresa, cargo e tempo de serviço");
     input.className = className;
-    container.appendChild(input);
+    input.style.flex = "1";
+
+    const removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.textContent = "Remover";
+    removeBtn.style.backgroundColor = "#ccc";
+    removeBtn.onclick = () => wrapper.remove();
+
+    wrapper.appendChild(input);
+    wrapper.appendChild(removeBtn);
+    container.appendChild(wrapper);
   });
-}
-
-async function carregarDados(uid) {
-  const docRef = doc(db, "usuarios", uid);
-  const snap = await getDoc(docRef);
-
-  if (snap.exists()) {
-    const dados = snap.data();
-    document.getElementById("nome").value = dados.nome || "";
-    document.getElementById("nascimento").value = dados.nascimento || "";
-    document.getElementById("cidadeEstado").value = dados.cidadeEstado || "";
-    document.getElementById("telefone").value = dados.telefone || "";
-    document.getElementById("escolaridade").value = dados.escolaridade || "";
-    document.getElementById("idiomas").value = dados.idiomas || "";
-    document.getElementById("informatica").value = dados.informatica || "";
-    document.getElementById("sobre").value = dados.sobre || "";
-
-    setCheckedValues("situacao", dados.situacao || []);
-    setCheckedValues("interesses", dados.interesses || []);
-    setCheckedValues("disponibilidade", dados.disponibilidade || []);
-    setInputValues("curso-extra", dados.cursos || []);
-    setInputValues("experiencia-extra", dados.experiencia || []);
-    setInputValues("atividade-extra", dados.atividades || []);
-  }
 }
 
 form.addEventListener("submit", async (e) => {
