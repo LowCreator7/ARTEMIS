@@ -285,5 +285,79 @@
     adicionarCampo("experiencias", "experiencia-extra", "Empresa, cargo e tempo de serviço");
     adicionarCampo("experiencias", "atividade-extra", "Atividades exercidas e resultados");
   </script>
+  <script type="module">
+  import { auth, db } from './firebaseConfig.js';
+  import { onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+  import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+  const params = new URLSearchParams(window.location.search);
+  const modoEdicao = params.get('editar') === 'true';
+
+  if (modoEdicao) {
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) return;
+      const uid = user.uid;
+      const snap = await getDoc(doc(db, "usuarios", uid));
+      if (snap.exists()) {
+        const dados = snap.data();
+
+        document.getElementById("nome").value = dados.nome || "";
+        document.getElementById("nascimento").value = dados.nascimento || "";
+        document.getElementById("cidadeEstado").value = dados.cidadeEstado || "";
+        document.getElementById("telefone").value = dados.telefone || "";
+        document.getElementById("escolaridade").value = dados.escolaridade || "";
+        document.getElementById("idiomas").value = dados.idiomas || "";
+        document.getElementById("informatica").value = dados.informatica || "";
+        document.getElementById("sobre").value = dados.sobre || "";
+
+        if (dados.fotoURL) {
+          const img = document.getElementById("previewFoto");
+          img.src = dados.fotoURL;
+          img.style.display = "block";
+        }
+
+        preencherCheckboxes("situacao", dados.situacao || []);
+        preencherCheckboxes("interesses", dados.interesses || []);
+        preencherCheckboxes("disponibilidade", dados.disponibilidade || []);
+
+        preencherCamposExtras("qualificacoes", dados.cursos || [], "curso-extra", "Curso (nome + instituição)");
+        preencherCamposExtras("experiencias", dados.experiencia || [], "experiencia-extra", "Empresa, cargo e tempo de serviço");
+        preencherCamposExtras("experiencias", dados.atividades || [], "atividade-extra", "Atividades exercidas e resultados");
+      }
+    });
+
+    function preencherCheckboxes(containerId, valores) {
+      const checkboxes = document.querySelectorAll(`#${containerId} input[type="checkbox"]`);
+      checkboxes.forEach(cb => {
+        cb.checked = valores.includes(cb.value);
+      });
+    }
+
+    function preencherCamposExtras(containerId, valores, className, placeholder) {
+      const container = document.getElementById(containerId);
+      container.innerHTML = ''; // limpar antes de preencher
+      valores.forEach(valor => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "input-row";
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = placeholder;
+        input.className = className;
+        input.value = valor;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.textContent = "Remover";
+        removeBtn.className = "remove-btn";
+        removeBtn.onclick = () => wrapper.remove();
+
+        wrapper.appendChild(input);
+        wrapper.appendChild(removeBtn);
+        container.appendChild(wrapper);
+      });
+    }
+  }
+</script>
 </body>
 </html>
