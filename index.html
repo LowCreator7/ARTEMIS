@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Login</title>
   <link rel="stylesheet" href="style.css" />
   <style>
@@ -59,14 +60,36 @@
     a:hover {
       text-decoration: underline;
     }
+    @media (max-width: 600px) {
+  .container {
+    padding: 30px 20px;
+    margin: 40px 20px;
+  }
+
+  .login-box {
+    width: 90%;
+    padding: 30px 20px;
+    margin-top: 20%;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .logo {
+    width: 180px;
+  }
+
+  input, button {
+    font-size: 15px;
+    padding: 10px;
+  }
+}
   </style>
 </head>
 <body>
   <div class="container">
+  <div class="login-box">
     <!-- LOGO -->
     <img src="logo.png" alt="Logo Ártemis" class="logo" />
     
-    <h1></h1>
     <form>
       <input type="email" id="email" placeholder="E-mail" required />
       <input type="password" id="senha" placeholder="Senha" required />
@@ -76,6 +99,7 @@
       <a href="registro.html">Criar nova conta</a>
     </p>
   </div>
+</div>
 
   <script type="module">
     import { auth } from './firebaseConfig.js';
