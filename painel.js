@@ -16,15 +16,31 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-function getCheckboxValues(groupId) {
-  return Array.from(document.querySelectorAll(`#${groupId} input[type=checkbox]:checked`)).map(cb => cb.value);
+function getCheckedValues(containerId) {
+  return Array.from(document.querySelectorAll(`#${containerId} input:checked`)).map(input => input.value);
 }
 
-function setCheckboxValues(groupId, values) {
-  if (!Array.isArray(values)) return;
-  const checkboxes = document.querySelectorAll(`#${groupId} input[type=checkbox]`);
-  checkboxes.forEach(cb => {
-    cb.checked = values.includes(cb.value);
+function setCheckedValues(containerId, values) {
+  const inputs = document.querySelectorAll(`#${containerId} input[type='checkbox']`);
+  inputs.forEach(input => {
+    input.checked = values.includes(input.value);
+  });
+}
+
+function getInputValues(className) {
+  return Array.from(document.getElementsByClassName(className)).map(input => input.value).filter(val => val.trim() !== "");
+}
+
+function setInputValues(className, values) {
+  const container = className.includes('curso') ? document.getElementById('qualificacoes') : document.getElementById('experiencias');
+  container.innerHTML = '';
+  values.forEach(val => {
+    const input = document.createElement("input");
+    input.type = "text";
+    input.value = val;
+    input.placeholder = className.includes('curso') ? "Curso (nome + instituição)" : (className.includes('atividade') ? "Atividades exercidas e resultados" : "Empresa, cargo e tempo de serviço");
+    input.className = className;
+    container.appendChild(input);
   });
 }
 
@@ -39,17 +55,16 @@ async function carregarDados(uid) {
     document.getElementById("cidadeEstado").value = dados.cidadeEstado || "";
     document.getElementById("telefone").value = dados.telefone || "";
     document.getElementById("escolaridade").value = dados.escolaridade || "";
-
-    setCheckboxValues("situacao", dados.situacao || []);
-    setCheckboxValues("interesses", dados.interesses || []);
-    setCheckboxValues("disponibilidade", dados.disponibilidade || []);
-
-    document.getElementById("cursos").value = dados.cursos || "";
     document.getElementById("idiomas").value = dados.idiomas || "";
     document.getElementById("informatica").value = dados.informatica || "";
-    document.getElementById("experiencia").value = dados.experiencia || "";
-    document.getElementById("atividades").value = dados.atividades || "";
     document.getElementById("sobre").value = dados.sobre || "";
+
+    setCheckedValues("situacao", dados.situacao || []);
+    setCheckedValues("interesses", dados.interesses || []);
+    setCheckedValues("disponibilidade", dados.disponibilidade || []);
+    setInputValues("curso-extra", dados.cursos || []);
+    setInputValues("experiencia-extra", dados.experiencia || []);
+    setInputValues("atividade-extra", dados.atividades || []);
   }
 }
 
@@ -62,15 +77,15 @@ form.addEventListener("submit", async (e) => {
     cidadeEstado: document.getElementById("cidadeEstado").value,
     telefone: document.getElementById("telefone").value,
     escolaridade: document.getElementById("escolaridade").value,
-    situacao: getCheckboxValues("situacao"),
-    interesses: getCheckboxValues("interesses"),
-    disponibilidade: getCheckboxValues("disponibilidade"),
-    cursos: document.getElementById("cursos").value,
     idiomas: document.getElementById("idiomas").value,
     informatica: document.getElementById("informatica").value,
-    experiencia: document.getElementById("experiencia").value,
-    atividades: document.getElementById("atividades").value,
     sobre: document.getElementById("sobre").value,
+    situacao: getCheckedValues("situacao"),
+    interesses: getCheckedValues("interesses"),
+    disponibilidade: getCheckedValues("disponibilidade"),
+    cursos: getInputValues("curso-extra"),
+    experiencia: getInputValues("experiencia-extra"),
+    atividades: getInputValues("atividade-extra"),
     tipoUsuario: "candidato",
     atualizadoEm: new Date()
   };
