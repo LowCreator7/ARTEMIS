@@ -151,6 +151,64 @@
       height: 42px;
       align-self: center;
     }
+    @media (max-width: 768px) {
+  body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .sidebar a {
+    display: inline-block;
+    margin: 10px;
+    font-size: 15px;
+  }
+
+  .content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .perfil-container {
+    padding: 20px;
+    box-shadow: none;
+    border-radius: 8px;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .remove-btn {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }
+
+  button {
+    width: 100%;
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  #previewFoto {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    display: block;
+  }
+}
   </style>
 </head>
 <body>
