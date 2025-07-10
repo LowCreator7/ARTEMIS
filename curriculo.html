@@ -112,11 +112,16 @@
 
       <h2>🎓 Escolaridade e Situação Atual</h2>
       <p><strong>Escolaridade:</strong> <span id="escolaridade"></span></p>
+
+      <h2>🎓 Situação Atual</h2>
       <p><strong>Situação:</strong></p>
       <div id="situacao" style="margin-bottom: 10px;"></div>
 
       <h2>💡 Interesses</h2>
+      <p><strong>Interesses:</strong></p>
       <div id="interesses" style="margin-bottom: 10px;"></div>
+
+      <h2>💡 Disponibilidade</h2>
       <p><strong>Disponibilidade:</strong></p>
       <div id="disponibilidade"></div>
 
@@ -134,7 +139,7 @@
     </div>
 
     <div style="margin-top: 30px; display: flex; gap: 20px;">
-      <button onclick="window.location.href='perfil.html'">✏️ Editar Currículo</button>
+      <button onclick="editarCurriculo()">✏️ Editar Currículo</button>
       <button onclick="limparCurriculo()">🧹 Limpar Currículo</button>
     </div>
   </main>
@@ -193,6 +198,10 @@
     window.logout = async () => {
       await signOut(auth);
       window.location.href = 'index.html';
+    };
+
+    window.editarCurriculo = () => {
+      window.location.href = 'perfil.html';
     };
   </script>
 
