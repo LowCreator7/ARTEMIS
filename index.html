@@ -66,13 +66,6 @@
     margin: 40px 20px;
   }
 
-  .login-box {
-    width: 90%;
-    padding: 30px 20px;
-    margin-top: 20%;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
-  }
-
   .logo {
     width: 180px;
   }
@@ -86,10 +79,10 @@
 </head>
 <body>
   <div class="container">
-  <div class="login-box">
     <!-- LOGO -->
     <img src="logo.png" alt="Logo Ártemis" class="logo" />
     
+    <h1></h1>
     <form>
       <input type="email" id="email" placeholder="E-mail" required />
       <input type="password" id="senha" placeholder="Senha" required />
@@ -99,7 +92,6 @@
       <a href="registro.html">Criar nova conta</a>
     </p>
   </div>
-</div>
 
   <script type="module">
     import { auth } from './firebaseConfig.js';
