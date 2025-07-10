@@ -110,38 +110,10 @@
       background-color: #d98f00;
     }
 
-    .multi-select {
-      margin-bottom: 20px;
-    }
-
-    .multi-select input {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .tag {
-      background-color: #F4A300;
-      color: white;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .tag .remove {
-      cursor: pointer;
-      font-weight: bold;
+    .checkbox-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
     }
   </style>
 </head>
@@ -178,21 +150,35 @@
         </select>
 
         <h2>🎓 Situação</h2>
-        <div class="multi-select" id="situacaoContainer">
-          <div class="tags" id="situacaoTags"></div>
-          <input type="text" id="situacaoInput" placeholder="Digite e aperte Enter" />
+        <div class="checkbox-group" id="situacao">
+          <label><input type="checkbox" value="Trabalhando"> Trabalhando</label>
+          <label><input type="checkbox" value="Estudando"> Estudando</label>
+          <label><input type="checkbox" value="Procurando Primeiro Emprego"> Procurando Primeiro Emprego</label>
+          <label><input type="checkbox" value="Em busca de realocação no mercado"> Em busca de realocação no mercado</label>
+          <label><input type="checkbox" value="Outro"> Outro</label>
         </div>
 
         <h2>💡 Interesses</h2>
-        <div class="multi-select" id="interessesContainer">
-          <div class="tags" id="interessesTags"></div>
-          <input type="text" id="interessesInput" placeholder="Digite e aperte Enter" />
+        <div class="checkbox-group" id="interesses">
+          <label><input type="checkbox" value="Atendimento ao público"> Atendimento ao público</label>
+          <label><input type="checkbox" value="Administrativo"> Administrativo</label>
+          <label><input type="checkbox" value="Logística"> Logística</label>
+          <label><input type="checkbox" value="Tecnologia"> Tecnologia</label>
+          <label><input type="checkbox" value="Vendas"> Vendas</label>
+          <label><input type="checkbox" value="Serviços gerais"> Serviços gerais</label>
+          <label><input type="checkbox" value="Produção/Industria"> Produção/Indústria</label>
+          <label><input type="checkbox" value="Saúde"> Saúde</label>
+          <label><input type="checkbox" value="Educação"> Educação</label>
+          <label><input type="checkbox" value="Outros"> Outros</label>
         </div>
 
         <h2>💡 Disponibilidade</h2>
-        <div class="multi-select" id="disponibilidadeContainer">
-          <div class="tags" id="disponibilidadeTags"></div>
-          <input type="text" id="disponibilidadeInput" placeholder="Digite e aperte Enter" />
+        <div class="checkbox-group" id="disponibilidade">
+          <label><input type="checkbox" value="Manhã"> Manhã</label>
+          <label><input type="checkbox" value="Tarde"> Tarde</label>
+          <label><input type="checkbox" value="Noite"> Noite</label>
+          <label><input type="checkbox" value="Integral"> Integral</label>
+          <label><input type="checkbox" value="Escala/Finais de semana"> Escala/Finais de semana</label>
         </div>
 
         <h2>📚 Qualificações</h2>
