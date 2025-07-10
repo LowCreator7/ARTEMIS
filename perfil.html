@@ -114,6 +114,15 @@
       display: block;
       margin-bottom: 8px;
       font-size: 15px;
+      background-color: #F4A300;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .checkbox-group input {
+      margin-right: 10px;
     }
   </style>
 </head>
@@ -182,13 +191,14 @@
         </div>
 
         <h2>📚 Qualificações</h2>
-        <input type="text" id="cursos" placeholder="Cursos realizados (nome + instituição)" />
+        <div id="qualificacoes"></div>
+        <button type="button" onclick="adicionarQualificacao()">➕ Adicionar Curso</button>
         <input type="text" id="idiomas" placeholder="Idiomas e nível de fluência" />
         <input type="text" id="informatica" placeholder="Ferramentas ou sistemas que domina" />
 
         <h2>💼 Experiência Profissional</h2>
-        <textarea id="experiencia" placeholder="Empresa, cargo e tempo de serviço"></textarea>
-        <textarea id="atividades" placeholder="Atividades exercidas e resultados alcançados"></textarea>
+        <div id="experiencias"></div>
+        <button type="button" onclick="adicionarExperiencia()">➕ Adicionar Experiência</button>
 
         <h2>🧠 Sobre Você</h2>
         <textarea id="sobre" placeholder="Como você se descreveria como profissional?"></textarea>
@@ -220,6 +230,37 @@
         reader.readAsDataURL(file);
       }
     });
+  </script>
+  <script>
+    function adicionarQualificacao() {
+      const container = document.getElementById("qualificacoes");
+      const input = document.createElement("input");
+      input.type = "text";
+      input.placeholder = "Curso (nome + instituição)";
+      input.className = "curso-extra";
+      container.appendChild(input);
+    }
+
+    function adicionarExperiencia() {
+      const container = document.getElementById("experiencias");
+
+      const expInput = document.createElement("input");
+      expInput.type = "text";
+      expInput.placeholder = "Empresa, cargo e tempo de serviço";
+      expInput.className = "experiencia-extra";
+
+      const atividadesInput = document.createElement("input");
+      atividadesInput.type = "text";
+      atividadesInput.placeholder = "Atividades exercidas e resultados";
+      atividadesInput.className = "atividade-extra";
+
+      container.appendChild(expInput);
+      container.appendChild(atividadesInput);
+    }
+
+    // Inicializa com um campo por padrão
+    adicionarQualificacao();
+    adicionarExperiencia();
   </script>
 </body>
 </html>
