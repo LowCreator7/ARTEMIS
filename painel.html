@@ -4,18 +4,60 @@
   <meta charset="UTF-8">
   <title>Painel do Candidato</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #F4A300;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ccc;
+      margin: 10px 0;
+    }
+
+    .section-title {
+      margin-top: 30px;
+      color: #F4A300;
+      font-weight: 600;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>Perfil Profissional</h1>
+    <div class="topbar">
+      <h1>👤 Meu Perfil</h1>
+      <button onclick="logout()" style="background-color: white; color: #F4A300; border: none; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Sair</button>
+    </div>
+
     <form id="formPainel">
+      <!-- Foto do usuário -->
+      <p class="section-title">📸 Foto de Perfil</p>
+      <input type="file" id="foto" accept="image/*" />
+      <img id="previewFoto" class="profile-pic" src="" alt="Prévia da foto" style="display: none;" />
+
       <!-- Nome e dados pessoais -->
+      <p class="section-title">🧍 Dados Pessoais</p>
       <input type="text" id="nome" placeholder="Nome completo" required />
       <input type="date" id="nascimento" placeholder="Data de nascimento" required />
       <input type="text" id="cidadeEstado" placeholder="Cidade e Estado" required />
       <input type="tel" id="telefone" placeholder="Telefone / WhatsApp" required />
 
       <!-- Escolaridade e situação -->
+      <p class="section-title">🎓 Escolaridade e Situação</p>
       <select id="escolaridade" required>
         <option value="">Escolaridade atual</option>
         <option>Ensino Fundamental</option>
@@ -27,25 +69,52 @@
       <input type="text" id="situacao" placeholder="Situação atual (ex: estudando, trabalhando...)" required />
 
       <!-- Interesses -->
+      <p class="section-title">💡 Interesses</p>
       <input type="text" id="interesses" placeholder="Áreas de interesse (separadas por vírgula)" />
       <input type="text" id="disponibilidade" placeholder="Turno disponível (ex: manhã, tarde, integral)" />
 
       <!-- Qualificações -->
+      <p class="section-title">📚 Qualificações</p>
       <input type="text" id="cursos" placeholder="Cursos realizados (nome + instituição)" />
       <input type="text" id="idiomas" placeholder="Idiomas e nível de fluência" />
       <input type="text" id="informatica" placeholder="Ferramentas ou sistemas que domina" />
 
       <!-- Experiência -->
+      <p class="section-title">💼 Experiência Profissional</p>
       <textarea id="experiencia" placeholder="Empresa, cargo e tempo de serviço"></textarea>
       <textarea id="atividades" placeholder="Atividades exercidas e resultados alcançados"></textarea>
 
       <!-- Sobre -->
+      <p class="section-title">🧠 Sobre Você</p>
       <textarea id="sobre" placeholder="Como você se descreveria como profissional?"></textarea>
 
-      <button type="submit">Salvar Perfil</button>
+      <button type="submit">💾 Salvar Perfil</button>
     </form>
   </div>
 
   <script type="module" src="painel.js"></script>
+  <script type="module">
+    import { auth } from './firebaseConfig.js';
+    import { signOut } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
+    window.logout = async () => {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    };
+
+    // Preview da foto de perfil
+    document.getElementById('foto').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+          const img = document.getElementById('previewFoto');
+          img.src = event.target.result;
+          img.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 </body>
 </html>
