@@ -109,6 +109,40 @@
     button:hover {
       background-color: #d98f00;
     }
+
+    .multi-select {
+      margin-bottom: 20px;
+    }
+
+    .multi-select input {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      background-color: #F4A300;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag .remove {
+      cursor: pointer;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -144,38 +178,22 @@
         </select>
 
         <h2>🎓 Situação</h2>
-        <select id="situacao" required multiple>
-          <option value="">Situação atual</option>
-          <option>Trabalhando</option>
-          <option>Estudando</option>
-          <option>Procurando Primeiro Emprego</option>
-          <option>Em busca de realocação no mercado</option>
-          <option>Outro</option>
-        </select>
+        <div class="multi-select" id="situacaoContainer">
+          <div class="tags" id="situacaoTags"></div>
+          <input type="text" id="situacaoInput" placeholder="Digite e aperte Enter" />
+        </div>
 
         <h2>💡 Interesses</h2>
-        <select id="interesses" required multiple>
-          <option>Atendimento ao público</option>
-          <option>Administrativo</option>
-          <option>Logística</option>
-          <option>Tecnologia</option>
-          <option>Vendas</option>
-          <option>Serviços gerais</option>
-          <option>Produção/Industria</option>
-          <option>Saúde</option>
-          <option>Educação</option>
-          <option>Outros</option>
-        </select>
+        <div class="multi-select" id="interessesContainer">
+          <div class="tags" id="interessesTags"></div>
+          <input type="text" id="interessesInput" placeholder="Digite e aperte Enter" />
+        </div>
 
         <h2>💡 Disponibilidade</h2>
-        <select id="disponibilidade" required multiple>
-          <option value="">Selecione</option>
-          <option>Manhã</option>
-          <option>Tarde</option>
-          <option>Noite</option>
-          <option>Integral</option>
-          <option>Escala/Finais de semana</option>
-        </select>
+        <div class="multi-select" id="disponibilidadeContainer">
+          <div class="tags" id="disponibilidadeTags"></div>
+          <input type="text" id="disponibilidadeInput" placeholder="Digite e aperte Enter" />
+        </div>
 
         <h2>📚 Qualificações</h2>
         <input type="text" id="cursos" placeholder="Cursos realizados (nome + instituição)" />
