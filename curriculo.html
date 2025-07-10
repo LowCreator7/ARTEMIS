@@ -112,11 +112,13 @@
 
       <h2>🎓 Escolaridade e Situação Atual</h2>
       <p><strong>Escolaridade:</strong> <span id="escolaridade"></span></p>
-      <p><strong>Situação:</strong> <span id="situacao"></span></p>
+      <p><strong>Situação:</strong></p>
+      <div id="situacao" style="margin-bottom: 10px;"></div>
 
       <h2>💡 Interesses</h2>
-      <div id="interesses"></div>
-      <p><strong>Disponibilidade:</strong> <span id="disponibilidade"></span></p>
+      <div id="interesses" style="margin-bottom: 10px;"></div>
+      <p><strong>Disponibilidade:</strong></p>
+      <div id="disponibilidade"></div>
 
       <h2>📚 Qualificações</h2>
       <p><strong>Cursos:</strong> <span id="cursos"></span></p>
@@ -153,8 +155,6 @@
         document.getElementById("cidadeEstado").textContent = dados.cidadeEstado || "";
         document.getElementById("telefone").textContent = dados.telefone || "";
         document.getElementById("escolaridade").textContent = dados.escolaridade || "";
-        document.getElementById("situacao").textContent = dados.situacao || "";
-        document.getElementById("disponibilidade").textContent = dados.disponibilidade || "";
         document.getElementById("cursos").textContent = dados.cursos || "";
         document.getElementById("idiomas").textContent = dados.idiomas || "";
         document.getElementById("informatica").textContent = dados.informatica || "";
@@ -162,15 +162,20 @@
         document.getElementById("atividades").textContent = dados.atividades || "";
         document.getElementById("sobre").textContent = dados.sobre || "";
 
-        if (dados.interesses) {
-          const interessesEl = document.getElementById("interesses");
-          dados.interesses.forEach(item => {
+        function renderTags(containerId, values) {
+          const container = document.getElementById(containerId);
+          container.innerHTML = "";
+          (values || []).forEach(item => {
             const span = document.createElement("span");
             span.className = "tag";
             span.textContent = item;
-            interessesEl.appendChild(span);
+            container.appendChild(span);
           });
         }
+
+        renderTags("interesses", dados.interesses);
+        renderTags("situacao", dados.situacao);
+        renderTags("disponibilidade", dados.disponibilidade);
 
         if (dados.fotoURL) {
           const foto = document.getElementById("fotoPerfil");
